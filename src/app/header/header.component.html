@@ -1,0 +1,43 @@
+<nav class="  border-gray-200 dark:bg-white"  style="background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);">
+    <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+        <!-- Left side - Brand/logo and Navigation links -->
+        <div class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a class="flex items-center text-indigo-400 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" routerLink="/home">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">Codeo</span>
+              </a>
+
+            <!-- Navigation links -->
+            <ul class="font-medium flex flex-col  mt-4  space-y-2 md:p-0 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ">
+                <!-- <li>
+                    <a routerLink="/home" class="block px-3 text-black  md:hover:text-blue-700   " aria-current="page">
+                        Home
+                    </a>
+                </li> -->
+                <li>
+                    <a routerLink="/admin" *ngIf="userService.roleMatch(['Admin'])" class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                        Admin Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/user"   *ngIf="userService.roleMatch(['user'])" class="block py-2 px-3  rounded text-white hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                        User Dashboard
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <!-- Login Box -->
+            <button routerLink="/login" *ngIf="! loggedIn()" type="button" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded transition duration-300 ease-in-out focus:outline-none focus:ring focus:border-green-300" >
+                Login
+            </button>
+            
+            <button  *ngIf=" loggedIn()" (click)="logOut()" type="button" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded transition duration-300 ease-in-out focus:outline-none focus:ring focus:border-red-300" >
+                Logout
+            </button>
+            
+        </div>
+        
+        
+    </div>
+</nav>

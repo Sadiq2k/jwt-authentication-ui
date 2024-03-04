@@ -1,0 +1,60 @@
+    <div class=" ">
+        <div class="p-4 flex justify-between items-center text-white bg-gray-900">
+            <h1 class="text-3xl font-bold">User Management</h1>
+            <button [routerLink]="['/addUser']" routerLinkActive="router-link-active" class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add User</button>
+        </div>
+        <div class="flex justify-center">
+            <table class="min-w-full bg-red-900 shadow-md rounded overflow-hidden space-y-4 md:space-y-6">
+                <thead class="text-white ">
+                    <tr>
+                        <th class="py-3 px-5 text-left">User Name</th>
+                        <th class="py-3 px-5 text-left">First Name</th>
+                        <th class="py-3 px-5 text-left">Last Name</th>
+                        <th class="py-3 px-5 text-left">Email</th>
+                        <th class="py-3 px-5 text-left">Role</th>
+                        <th class="py-3 px-5 text-left">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let user of users$ |async">
+                    <tr *ngIf="userRoles[user.userName] !='Admin'" class="border-b hover:bg-slate-400block dark:bg-gray-700 mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    <td class="py-3 px-5">{{ user.userName }}</td>
+                    <td class="py-3 px-5">{{ user.firstName }}</td>
+                    <td class="py-3 px-5">{{ user.lastName  }}</td>
+                    <td class="py-3 px-5">{{ user.email }}</td>
+                    <td class="py-3 px-5">{{ userRoles[user.userName] }}</td>
+                    <td class="py-3 px-5">
+                        <i class="fa-regular fa-pen-to-square mr-2 cursor-pointer text-green-500" style="padding-right: 7px;" (click)="openEditForm(user)"></i>
+                        <i class="fa-solid fa-trash cursor-pointer text-red-500" (click)="deleteUser(user.userName)"></i>
+                    </td>
+                    </tr>
+                    <ng-container *ngIf="editUser && editUser.userName === user.userName">
+                        <!-- Edit form for the selected user -->
+                        
+                        <tr>
+                            <td class="py-3 px-5">
+                                <input [(ngModel)]="editUser.userName" class="form-input" />
+                            </td>
+                            <td class="py-3 px-5">
+                                <input [(ngModel)]="editUser.firstName" class="form-input" />
+                            </td>
+                            <td class="py-3 px-5">
+                                <input [(ngModel)]="editUser.lastName"  class="form-input" />
+                            </td>
+                            <td class="py-3 px-5">
+                                <input [(ngModel)]="editUser.email" readonly class="form-input" />
+                            </td>
+                            <td class="py-3 px-5">
+                                <input [(ngModel)]="userRoles[editUser.userName]" readonly class="form-input" />
+                            </td>
+                            <td class="py-3 px-5">
+                                <i class="fa-solid fa-check-circle text-green-500 cursor-pointer" style="padding-right: 7px;" (click)="saveEditForm()"></i>
+                                <i class="fa-regular fa-times-circle text-red-500 cursor-pointer" (click)="cancelEditForm()"></i>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    
+            </table>
+        </div>
+    </div>
+
+    <!-- <button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Edit Profile</button> -->

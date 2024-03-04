@@ -1,0 +1,48 @@
+<div class="dark:bg-gray-900 flex flex-col items-center justify-start h-screen">
+  <div class="mt-4 max-w-sm">
+    <div class="p-6 bg-white rounded-xl flex items-center space-x-4">
+      <div class="flex-shrink-0" *ngFor="let image of user.userImages">
+        <img class="h-24 w-24 rounded-full" [src]="getImageSrc(image)" alt="User Avatar">
+      </div>
+        
+      <div class="ml-4 max-w-sm">
+        <div class="text-xl font-medium text-black">
+          {{userProfile?.firstName +' '+ userProfile?.lastName}}
+        </div>
+        <p class="text-gray-500">{{userProfile?.email}}</p>
+      </div>
+
+      <div class="flex flex-col items-end">
+        <!-- Add your additional options or buttons if needed -->
+      </div>
+    </div>
+  </div>
+  <input type="file" multiple value="select" #selectFile
+  class="mt-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (change)="onFileSelected($event)" >
+  <button (click)="onSubmit()" *ngIf="save" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="button">Save</button>
+  
+  <i class="mt-2 fa-regular fa-pen-to-square mr-2 cursor-pointer text-green-500" (click)="editUserData(userProfile)"></i>
+
+  <div class="mt-4 max-w-sm">
+    <form ngNativeValidate>
+      <div class="mb-4">
+        <label for="firstName" class="block text-white text-sm font-bold mb-2">First Name</label>
+        <input *ngIf="editMode" type="text" [value]="userProfile?.firstName" [(ngModel)]="changeValue.firstName" name="firstName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="firstName" placeholder="First Name">
+        <input type="text" readonly *ngIf="!editMode" [value]="userProfile?.firstName" name="firstName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" placeholder="Last Name">
+      </div>
+
+      <div class="mb-4">
+        <label for="lastName" class="block text-white text-sm font-bold mb-2">Last Name</label>
+        <input type="text" *ngIf="editMode" [value]="userProfile?.lastName" [(ngModel)]="changeValue.lastName" name="lastName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" placeholder="Last Name">
+        <input type="text" readonly *ngIf="!editMode" [value]="userProfile?.lastName" name="lastName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="lastName" placeholder="Last Name">
+      </div>
+
+      <!-- Other form fields and buttons if needed -->
+
+      <div *ngIf="editMode" class="flex items-center justify-center">
+        <button (click)="saveValue()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2" type="button">Save</button>
+        <button (click)="cancel()" class="bg-gray-500 hover:bg-gray-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
