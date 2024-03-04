@@ -156,16 +156,5 @@ console.log(formData);
     return this.httpClient.post<any>(this.PATH_OF_API + "/addProfilePic", formData, httpOptions);
   }
 
-
-  // getImage(userName: string): Observable<File> {
-  //   const jwtToken = this.userAuthService.getToken();
-  //   const httpOptions = {
-  //         headers: new HttpHeaders({
-  //           'Authorization': `Bearer ${jwtToken}`
-  //         })
-  //       };
-  //   return this.httpClient.get<File>(`/getImage/${userName}` ,httpOptions );
-  // }
-
   
 }
